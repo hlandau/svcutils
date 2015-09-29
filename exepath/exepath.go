@@ -37,4 +37,5 @@ func init() {
 	}
 
 	Abs = abs
+	initProgramName()
 }
