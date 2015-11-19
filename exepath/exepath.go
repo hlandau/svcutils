@@ -2,7 +2,9 @@ package exepath // import "gopkg.in/hlandau/svcutils.v1/exepath"
 
 import (
 	"os"
+  "os/exec"
 	"path/filepath"
+  "strings"
 )
 
 // Absolute path to EXE which was invoked. This is set at init()-time.
@@ -31,11 +33,28 @@ func getRawPath() string {
 }
 
 func init() {
-	abs, err := filepath.Abs(getRawPath())
-	if err != nil {
-		return
-	}
+  rawPath := getRawPath()
 
-	Abs = abs
+  // If there are no separators in rawPath, we've presumably been invoked from the path
+  // and should qualify the path accordingly.
+  idx := strings.IndexFunc(rawPath, func(r rune) bool {
+    return r == '/' || r == filepath.Separator
+  })
+  if idx < 0 {
+    abs, err := exec.LookPath(rawPath)
+    if err != nil {
+      return
+    }
+
+    Abs = abs
+  } else {
+    abs, err := filepath.Abs(rawPath)
+    if err != nil {
+      return
+    }
+
+    Abs = abs
+  }
+
 	initProgramName()
 }
