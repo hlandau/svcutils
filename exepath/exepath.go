@@ -2,9 +2,9 @@ package exepath // import "gopkg.in/hlandau/svcutils.v1/exepath"
 
 import (
 	"os"
-  "os/exec"
+	"os/exec"
 	"path/filepath"
-  "strings"
+	"strings"
 )
 
 // Absolute path to EXE which was invoked. This is set at init()-time.
@@ -16,8 +16,8 @@ func getRawPath() string {
 	// /proc/self/exe. This causes problems with layouts like
 	//
 	//   some-work-directory/
-	//     bin/ -> $GOPATH/bin
-	//     src/ -> $GOPATH/bin
+	//     bin/ -> symlink to $GOPATH/bin
+	//     src/ -> symlink to $GOPATH/src
 	//     etc/
 	//       ... configuration files ...
 	//
@@ -33,28 +33,28 @@ func getRawPath() string {
 }
 
 func init() {
-  rawPath := getRawPath()
+	rawPath := getRawPath()
 
-  // If there are no separators in rawPath, we've presumably been invoked from the path
-  // and should qualify the path accordingly.
-  idx := strings.IndexFunc(rawPath, func(r rune) bool {
-    return r == '/' || r == filepath.Separator
-  })
-  if idx < 0 {
-    abs, err := exec.LookPath(rawPath)
-    if err != nil {
-      return
-    }
+	// If there are no separators in rawPath, we've presumably been invoked from the path
+	// and should qualify the path accordingly.
+	idx := strings.IndexFunc(rawPath, func(r rune) bool {
+		return r == '/' || r == filepath.Separator
+	})
+	if idx < 0 {
+		abs, err := exec.LookPath(rawPath)
+		if err != nil {
+			return
+		}
 
-    Abs = abs
-  } else {
-    abs, err := filepath.Abs(rawPath)
-    if err != nil {
-      return
-    }
+		Abs = abs
+	} else {
+		abs, err := filepath.Abs(rawPath)
+		if err != nil {
+			return
+		}
 
-    Abs = abs
-  }
+		Abs = abs
+	}
 
 	initProgramName()
 }
