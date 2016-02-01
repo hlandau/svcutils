@@ -9,12 +9,24 @@ import "os"
 //
 // This comes from github.com/coreos/go-systemd/util, but that package has
 // become more complicated and dependent on cgo, so it is duplicated here.
-func IsRunningSystemd() bool {
+func IsRunning() bool {
 	fi, err := os.Lstat("/run/systemd/system")
 	if err != nil {
 		return false
 	}
 	return fi.IsDir()
+}
+
+// Deprecated.
+func IsRunningSystemd() bool {
+	return IsRunning()
+}
+
+// Technically this is 'is running under systemd with the notify service type'.
+// The purpose of this is to allow a daemon to determine whether it should
+// behave in a systemd-like way, though, so that's fine.
+func IsRunningUnder() bool {
+	return IsRunning() && os.Getenv("NOTIFY_SOCKET") != ""
 }
 
 // © 2015 CoreOS, Inc.    Apache 2.0 License
