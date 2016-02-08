@@ -21,7 +21,13 @@ The following packages are contained in this repository:
     does not work on Linux);
 
   * systemd, a package for detecting whether systemd is in use and sending
-    status messages to it, in a way that works in a chroot.
+    status messages to it, in a way that works in a chroot;
+
+  * caps, a package for detecting and dropping capabilities on Linux;
+
+  * dupfd, a package for duplicating file descriptors to a target
+    file descriptor number, which irons out some differences between
+    different \*NIX platforms.
 
 ## Licence
 
