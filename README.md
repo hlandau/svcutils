@@ -17,7 +17,7 @@ The following packages are contained in this repository:
 
   * setuid, a package for changing UID and GID on \*NIX systems,
     including workarounds for the unfortunate absurdities underlying
-    Linux's implementation of setuid (which mean that `syscall.Setuid`
+    Linux's implementation of setuid (which means that `syscall.Setuid`
     does not work on Linux);
 
   * systemd, a package for detecting whether systemd is in use and sending
