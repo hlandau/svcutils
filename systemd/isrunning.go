@@ -6,9 +6,6 @@ import "os"
 // system. This functions similar to systemd's `sd_booted(3)`: internally, it
 // checks whether /run/systemd/system/ exists and is a directory.
 // http://www.freedesktop.org/software/systemd/man/sd_booted.html
-//
-// This comes from github.com/coreos/go-systemd/util, but that package has
-// become more complicated and dependent on cgo, so it is duplicated here.
 func IsRunning() bool {
 	fi, err := os.Lstat("/run/systemd/system")
 	if err != nil {
@@ -17,7 +14,7 @@ func IsRunning() bool {
 	return fi.IsDir()
 }
 
-// Deprecated.
+// Deprecated. Use IsRunning() instead.
 func IsRunningSystemd() bool {
 	return IsRunning()
 }

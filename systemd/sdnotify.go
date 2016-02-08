@@ -22,9 +22,12 @@ var sdNotifyInited bool
 
 // Send sends a message to the init daemon. It is common to ignore the error.
 //
-// Taken from github.com/coreos/go-systemd/daemon. Since that code closes the
-// socket after each call it won't work in a chroot. It is customized here to
-// keep the socket open.
+// This function differs from that in github.com/coreos/go-systemd/daemon in
+// that that code closes the socket after each call, and so won't work in a
+// chroot. This function keeps the socket open; so long as it is called at
+// least once before chrooting, it can continue to be used.
+//
+// May return ErrNoSocket.
 func NotifySend(state string) error {
 	sdNotifyMutex.Lock()
 	defer sdNotifyMutex.Unlock()
