@@ -8,9 +8,10 @@
 #include <grp.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <errno.h>
 
-void de_gid_cb(void *ptr, gid_t gid);
+void de_gid_cb(uintptr_t ptr, gid_t gid);
 
 static int de_username_to_uid(const char *name, uid_t *uid) {
   struct passwd p, *pp = NULL;
@@ -72,7 +73,7 @@ again:
   return 0;
 }
 
-static int de_get_extra_gids(gid_t gid, void *p) {
+static int de_get_extra_gids(gid_t gid, uintptr_t p) {
   struct group g, *pg = NULL;
   size_t buflen = 1024;
   char *buf = NULL;

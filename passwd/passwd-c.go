@@ -11,6 +11,7 @@ import (
 #include "pwnam.h"
 #include <sys/types.h>
 #include <stdlib.h>
+#include <stdint.h>
 */
 import "C"
 
@@ -28,8 +29,8 @@ func getGIDForUID(uid string) (int, error) {
 }
 
 //export de_gid_cb
-func de_gid_cb(p unsafe.Pointer, gid C.gid_t) {
-	f := *(*func(C.gid_t))(p)
+func de_gid_cb(p C.uintptr_t, gid C.gid_t) {
+	f := *(*func(C.gid_t))(unsafe.Pointer(uintptr(p)))
 	f(gid)
 }
 
@@ -62,7 +63,7 @@ func getExtraGIDs(gid int) (gids []int, err error) {
 		gids = append(gids, int(gid))
 	}
 
-	if C.de_get_extra_gids(gidn, unsafe.Pointer(&f)) < 0 {
+	if C.de_get_extra_gids(gidn, C.uintptr_t(uintptr(unsafe.Pointer(&f)))) < 0 {
 		return nil, fmt.Errorf("cannot retrieve additional groups list for GID %d", gid)
 	}
 
