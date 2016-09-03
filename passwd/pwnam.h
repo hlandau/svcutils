@@ -2,7 +2,9 @@
 
 // This needs to be >=200112L or _SC_GETPW_R_SIZE_MAX etc. do not
 // manifest on Darwin.
-#define _POSIX_C_SOURCE 200112L
+#ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 200112L
+#endif
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
