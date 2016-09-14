@@ -23,7 +23,7 @@ static int de_username_to_uid(const char *name, uid_t *uid) {
   long sz;
 
   sz = sysconf(_SC_GETPW_R_SIZE_MAX);
-  if (sz > buflen)
+  if (sz > buflen && sz != SIZE_MAX)
     buflen = sz;
 
 again:
@@ -53,7 +53,7 @@ static int de_groupname_to_gid(const char *name, gid_t *gid) {
   long sz;
 
   sz = sysconf(_SC_GETGR_R_SIZE_MAX);
-  if (sz > buflen)
+  if (sz > buflen && sz != SIZE_MAX)
     buflen = sz;
 
 again:
@@ -85,7 +85,7 @@ static int de_get_extra_gids(gid_t gid, uintptr_t p) {
   gid_t agid;
 
   sz = sysconf(_SC_GETGR_R_SIZE_MAX);
-  if (sz > buflen)
+  if (sz > buflen && sz != SIZE_MAX)
     buflen = sz;
 
 again:
@@ -123,7 +123,7 @@ static int de_gid_for_uid(uid_t uid, gid_t *gid) {
   long sz;
 
   sz = sysconf(_SC_GETGR_R_SIZE_MAX);
-  if (sz > buflen)
+  if (sz > buflen && sz != SIZE_MAX)
     buflen = sz;
 
 again:
