@@ -33,7 +33,7 @@ The following packages are contained in this repository:
 
     © 2015—2016 Hugo Landau <hlandau@devever.net>
 
-[Licenced under the licence with SHA256 hash
+[Licensed under the licence with SHA256 hash
 `fd80a26fbb3f644af1fa994134446702932968519797227e07a1368dea80f0bc`, a copy of
 which can be found
 here.](https://github.com/hlandau/rilts/blob/master/licences/COPYING.MIT)
