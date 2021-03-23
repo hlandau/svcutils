@@ -1,4 +1,6 @@
-# Utilities for writing services in Go [![GoDoc](https://godoc.org/gopkg.in/hlandau/svcutils.v1?status.svg)](https://godoc.org/gopkg.in/hlandau/svcutils.v1)
+# Utilities for writing services in Go
+
+[![godocs.io](https://godocs.io/gopkg.in/hlandau/svcutils.v2?status.svg)](https://godocs.io/gopkg.in/hlandau/svcutils.v2) [![No modules](https://www.devever.net/~hl/f/no-modules2.svg) 100% modules-free.](https://www.devever.net/~hl/gomod)
 
 The following packages are contained in this repository:
 
