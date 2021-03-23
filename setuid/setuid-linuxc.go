@@ -1,4 +1,4 @@
-// +build cgo,linux
+// +build cgo,linux,!go1.16
 
 package setuid
 

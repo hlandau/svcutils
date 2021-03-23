@@ -1,4 +1,4 @@
-// +build !linux,!windows,!darwin,!freebsd,!openbsd,!netbsd,!solaris,!plan9,!dragonfly
+// +build !linux,!windows,!darwin,!freebsd,!openbsd,!netbsd,!solaris,!plan9,!dragonfly linux,go1.16
 
 package setuid
 
